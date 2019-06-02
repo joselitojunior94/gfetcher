@@ -3,8 +3,8 @@ An tool for extracting issues, labels, reactions and events from Github reposito
 
 To run GF it is necessary to have the packages installed below:
 
-Python 3.7.3 or higher;
-Pymongo
-PyGithub
+Python 3.7.3 or higher,
+Pymongo and
+PyGithub.
 
 It is also important to have a stable internet connection.
