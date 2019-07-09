@@ -15,13 +15,16 @@ def adicionaNaLista():
     if(entrada != ''):
         listbox.insert(END, entrada)
     elif(entrada == ''):
-        folder = filedialog.askopenfilename()
-        repositorios = open(folder,'r')
-        lista0 = repositorios.read().split('\n')
-        for l in lista0:
-            if( l != ' '):
-                listbox.insert(END, l)
-
+        try:
+            folder = filedialog.askopenfilename()
+            repositorios = open(folder,'r')
+            lista0 = repositorios.read().split('\n')
+            for l in lista0:
+                if( l != ' '):
+                    listbox.insert(END, l)
+        except FileNotFoundError as e:
+            print('Não houve seleção de arquivo.')
+            
 def extrairDados():
     vLogin = loginEntry.get()
     vPass =  passEntry.get()
