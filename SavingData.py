@@ -58,7 +58,7 @@ def extraiEventos(issue, a):
         raise 
     except GithubException as d:
         if(d.status == 403):
-            print("Limite de requisições atingido ao requisitar evento. Por favor, espere uma hora.")
+            print("Limite de requisições atingido ao requisitar evento.")
         raise
     
     return events
@@ -86,7 +86,7 @@ def extraiComentarios(issue, a):
             
     except GithubException as e:
         if(e.status == 403):
-            print("Limite de requisições atingido ao requisitar comentrários. Por favor, espere uma hora.")
+            print("Limite de requisições atingido ao requisitar comentrários.")
         raise
     except requests.exceptions.ReadTimeout as aes:
         print('Erro crítico ao resgatar issue.')
@@ -133,7 +133,7 @@ def extraiReacoes(r, a):
             
     except GithubException as e:
         if(e.status == 403):
-            print("Limite de requisições atingido ao requisitar reações. Por favor, espere uma hora.")
+            print("Limite de requisições atingido ao requisitar reações.")
         raise
     except requests.exceptions.ConnectionError as aes:
         print('Erro crítico ao resgatar issue.')
@@ -162,7 +162,7 @@ def extraiLabel(repo, a):
 
     except GithubException as e:
         if(e.status == 403):
-            print("Limite de requisições atingido ao requisitar labels. Por favor, espere uma hora.")
+            print("Limite de requisições atingido ao requisitar labels.")
         raise
     except requests.exceptions.ReadTimeout as aes:
         print('Erro crítico ao resgatar issue.')
@@ -187,7 +187,7 @@ def extractDataFromGithub(us, ps, repoList, opFlag, clFlag, comFlag, evtFlag, rc
         for repoID in repoList:
             repository = auth.get_repo(repoID)
             print('Extração do repositorio '+repository.name+ ' começou.')
-            verificaQuantRequisicoes(auth) #### Verifica
+            verificaQuantRequisicoes(auth) 
             l = '-'
             if(labelsFlag == 1):
                 l = extraiLabel(repository, auth)
@@ -196,8 +196,8 @@ def extractDataFromGithub(us, ps, repoList, opFlag, clFlag, comFlag, evtFlag, rc
                 for issue in issuesList:
                     if(findIssue(issue.number, repository.name) is None): 
                         lastIssue = issue
-                        verificaQuantRequisicoes(auth) #### Verifica  
-                        print('--> Extraindo Issue Open: '+str(issue.number))
+                        verificaQuantRequisicoes(auth)  
+                        print('--> Extraindo Open Issue : '+str(issue.number))
                         e = '-'
                         c = '-'
                         r = '-'
@@ -225,7 +225,7 @@ def extractDataFromGithub(us, ps, repoList, opFlag, clFlag, comFlag, evtFlag, rc
                     if(findIssue(issue.number, repository.name) is None): 
                         lastIssue = issue
                         verificaQuantRequisicoes(auth) #### Verifica
-                        print('--> Extraindo Issue Closed: '+str(issue.number))
+                        print('--> Extraindo Closed Issue: '+str(issue.number))
                         e = '-'
                         c = '-'
                         r = '-'
@@ -256,7 +256,7 @@ def extractDataFromGithub(us, ps, repoList, opFlag, clFlag, comFlag, evtFlag, rc
         return False      
     except GithubException as f:
         if(f.status == 403):
-            print("PRINCIPAL - Limite de requisições atingido ao requisitar issues. Após uma hora, reinicie a aplicação.")
+            print("PRINCIPAL - Limite de requisições atingido ao requisitar issues.")
             return False
         else:
             print("Erro na função principal")
@@ -287,9 +287,9 @@ def verificaQuantRequisicoes(auth):
             #verificaQuantRequisicoes(auth)
 
         while(requisicoesRestantes < 30):
-            print("~~~~~~~ Processo DORMIU ~~~~~~~")    
+            print("~~~~~~~ AGUARDANDO LIBERAÇÃO DA API ~~~~~~~")    
             time.sleep(1800)
-            print("~~~~~~~ Processo ACORDOU ~~~~~~~")
+            print("~~~~~~~ QUANTIDADE DE REQUISIÇÕES LIBERADAS ~~~~~~~")
             try:
                 requisicoesRestantes = int(auth.get_rate_limit().core.remaining)
             except requests.exceptions.ConnectionError as req:
