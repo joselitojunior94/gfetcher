@@ -38,12 +38,10 @@ with io.open(nome_arquivo, 'w', newline='') as file:
     WriterCSV = csv.writer(file, delimiter=';')
     WriterCSV.writerow(columns)
     
-    collection_name = ['terminal']
     for repo in collection_name:
-        p = banco[repo]
-        cursor = p.find({})
+        p = banco[repo] 
         print("Dados do repositório: "+ str(repo))
-        for document in cursor:
+        for document in p.find({}):
             if(document['Situação'] == 'open'):
                 quantIssuesOpen += 1
                 rD = document['Reações']
