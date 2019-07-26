@@ -62,7 +62,7 @@ listbox = Listbox(root, height=20)
 listbox.place(x=452, y=30)
 
 nomeRepositorioLabel = Label(
-    root, text="Insira o repositorio: Ex.: nomeUsuario/nomeRepositorio", background=color)
+    root, text="nomeUsuario/nomeRepositorio", background=color)
 nomeRepositorioLabel["font"] = ("Arial", "12", "bold")
 nomeRepositorioLabel.place(x=9, y=5)
 
@@ -78,7 +78,7 @@ inserirButton["command"] = adicionaNaLista
 inserirButton.place(x=296, y=60)
 
 removerButton = Button(root)
-removerButton["text"] = "< Remover repo "
+removerButton["text"] = "< Remover "
 removerButton["font"] = ("Calibri", "10")
 removerButton["width"] = 12
 removerButton["command"] = removerRepo
@@ -136,7 +136,7 @@ loginEntry["width"] = 10
 loginEntry.place(x=10, y=350)
 
 loginLabel = Label(
-    root, text="Password: ", background=color)
+    root, text="Senha: ", background=color)
 loginLabel["font"] = ("Arial", "12", "bold")
 loginLabel.place(x=150, y=332)
 
