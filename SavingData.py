@@ -100,19 +100,10 @@ def extraiReacoes(r, a):
     verificaQuantRequisicoes(a)
     print('----> ----> Extraindo REAÇÕES...') 
     count = [0, 0, 0, 0, 0, 0, 0, 0]
-    """ thumbsup [1]
-        deslike  [2]
-        hooray   [3]
-        heart    [4]
-        confused [5]
-        laugh    [6]
-        rocket   [7]
-        eyes     [8]
-    """
+   
     try:
         for reaction in r.get_reactions():
-            verificaQuantRequisicoes(a) #### Verifica
-            #print('------ Reaçoes')
+            verificaQuantRequisicoes(a) 
 
             if(reaction.content == '+1'):
                 count[0] += 1
@@ -153,7 +144,7 @@ def extraiReacoes(r, a):
 
 def extraiLabel(repo, a):
     print("-> Extraindo LABELS... ")
-    verificaQuantRequisicoes(a) #### Verifica 
+    verificaQuantRequisicoes(a) 
     labelList = []
     try:
         for label in repo.get_labels():        
@@ -220,11 +211,11 @@ def extractDataFromGithub(us, ps, repoList, opFlag, clFlag, comFlag, evtFlag, rc
                     
             if(clFlag == 1):
                 issuesList = repository.get_issues(state='closed')
-                verificaQuantRequisicoes(auth) #### Verifica
+                verificaQuantRequisicoes(auth) 
                 for issue in issuesList:
                     if(findIssue(issue.number, repository.name) is None): 
                         lastIssue = issue
-                        verificaQuantRequisicoes(auth) #### Verifica
+                        verificaQuantRequisicoes(auth) 
                         print('--> Extraindo Closed Issue: '+str(issue.number))
                         e = '-'
                         c = '-'
@@ -265,27 +256,18 @@ def extractDataFromGithub(us, ps, repoList, opFlag, clFlag, comFlag, evtFlag, rc
 def verificaQuantRequisicoes(auth):
     global requisicoesRestantes
     r = 0
-    #time.sleep(2) # Espera0
     requisicoesRestantes -= 1
-    #print('->->->-> Verificando requisições')
-    
-    #requisicoesRestantes = 
-    #print("Aux "+str(requisicoesRestantes))
     
     if(requisicoesRestantes < 30):
         try:
             r = int(auth.get_rate_limit().core.remaining)
             if(r > 30):
                 print("~~~~~~~ AJUSTANDO NÚMERO DE REQUISIÇÕES ~~~~~~~")
-                requisicoesRestantes = r
-            #print("Entrou r = "+str(r)+' e reqRestantes = '+str(requisicoesRestantes))
+                requisicoesRestantes = r     
         except requests.exceptions.ConnectionError as req:
             print("Erro de conexão")
             return False
-            #print('Timeout')
-            #time.sleep(60)
-            #verificaQuantRequisicoes(auth)
-
+    
         while(requisicoesRestantes < 30):
             print("~~~~~~~ AGUARDANDO LIBERAÇÃO DA API ~~~~~~~")    
             time.sleep(1800)
