@@ -7,7 +7,6 @@ from datetime import *
 from functools import partial
 import tkinter as tk
 import tkinter.messagebox
-from functools import partial
 
 def adicionaNaLista():
     entrada = nomeRepositorioEntry.get()
