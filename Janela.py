@@ -145,7 +145,5 @@ passEntry["width"] = 10
 passEntry.place(x=150, y=350)
 
 root.resizable(False, False)
-
 root.configure(background=color)
-
 root.mainloop() 
