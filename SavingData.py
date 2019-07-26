@@ -240,14 +240,14 @@ def extractDataFromGithub(us, ps, repoList, opFlag, clFlag, comFlag, evtFlag, rc
             print("Concluído!", "Trabalho concluído.")
             return True
     except requests.exceptions.ReadTimeout as req:
-        print("Erro de conexão -- PRINCIPAL")
+        print("Erro de conexão")
         return False
     except requests.exceptions.ConnectionError as req2:
-        print("Erro de conexão -- PRINCIPAL")
+        print("Erro de conexão")
         return False      
     except GithubException as f:
         if(f.status == 403):
-            print("PRINCIPAL - Limite de requisições atingido ao requisitar issues.")
+            print("Limite de requisições atingido ao requisitar issues.")
             return False
         else:
             print("Erro na função principal")
