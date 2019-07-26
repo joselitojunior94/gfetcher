@@ -51,15 +51,6 @@ def extrairDados():
 def removerRepo():
     listbox.delete(listbox.curselection())
 
-
-def goBugZilla():
-    root.destroy()
-    bugzillaGo()
-    
-def goJira():
-    root.destroy()
-    jiraGo()
-
 color = '#f2f2f2'
 
 root = Tk()
