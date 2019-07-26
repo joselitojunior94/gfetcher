@@ -1,4 +1,4 @@
-# Github Fetcher v5
+# gFetcher v5
 An tool for extracting issues, labels, reactions and events from Github repositories.
 
 To run GF it is necessary to have the packages installed below:
