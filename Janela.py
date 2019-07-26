@@ -129,7 +129,7 @@ extrairButton.place(x=296, y=350)
 loginLabel = Label(
     root, text="Login: ", background=color)
 loginLabel["font"] = ("Arial", "12", "bold")
-loginLabel.place(x=10, y=332)
+loginLabel.place(x=10, y=328)
 
 loginEntry = Entry(root)
 loginEntry["width"] = 10
@@ -138,9 +138,9 @@ loginEntry.place(x=10, y=350)
 loginLabel = Label(
     root, text="Senha: ", background=color)
 loginLabel["font"] = ("Arial", "12", "bold")
-loginLabel.place(x=150, y=332)
+loginLabel.place(x=150, y=328)
 
-passEntry = Entry(root)
+passEntry = Entry(root, show='*')
 passEntry["width"] = 10
 passEntry.place(x=150, y=350)
 
