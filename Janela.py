@@ -56,7 +56,7 @@ color = '#f2f2f2'
 root = Tk()
 root.geometry("600x380+400+200")
 root.resizable(10, 0)
-root.title("Github Fetcher")
+root.title("gFetcher")
 
 listbox = Listbox(root, height=20)
 listbox.place(x=452, y=30)
