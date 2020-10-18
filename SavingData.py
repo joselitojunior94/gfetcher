@@ -26,7 +26,6 @@ def extraiEventos(issue, a):
         print('---> Mining EVENTS...')
         
     events = []
-    global LANG
 
     try:
         e = ''
