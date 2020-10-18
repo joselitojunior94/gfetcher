@@ -331,7 +331,7 @@ def extractDataFromGithub(key, repo, initialIssue, finalIssue, lang, opFlag, clF
             print("Erro na função principal")
             return False 
 
-def verificaQuantRequisicoes(auth):
+def verificaQuantRequisicoes(auth, lang):
     global requisicoesRestantes
     r = 0
     requisicoesRestantes -= 1
@@ -340,22 +340,42 @@ def verificaQuantRequisicoes(auth):
         try:
             r = int(auth.get_rate_limit().core.remaining)
             if(r > 30):
-                print("~~~~~~~ AJUSTANDO NÚMERO DE REQUISIÇÕES ~~~~~~~")
+                if(lang == 'pt'):
+                    print("~~~~~~~ AJUSTANDO NÚMERO DE REQUISIÇÕES ~~~~~~~")
+                elif(lang == 'en'):
+                    print("~~~~~~~ Adjusting number of requests ~~~~~~~")
                 requisicoesRestantes = r     
         except requests.exceptions.ConnectionError as req:
-            print("Erro de conexão")
+            if(lang == 'pt'):
+                print("Erro de conexão")
+            elif(lang == 'en'):
+                print("Connection error")
             return False
     
         while(requisicoesRestantes < 30):
-            print("~~~~~~~ AGUARDANDO LIBERAÇÃO DA API ~~~~~~~")    
+            if(lang == 'pt'):
+                print("~~~~~~~ AGUARDANDO LIBERAÇÃO DA API ~~~~~~~")
+            elif(lang == 'en'):
+                print("~~~~~~~ WAITING FOR API ~~~~~~~")    
             time.sleep(1800)
-            print("~~~~~~~ QUANTIDADE DE REQUISIÇÕES LIBERADAS ~~~~~~~")
+            if(lang == 'pt'):
+                print("~~~~~~~ QUANTIDADE DE REQUISIÇÕES LIBERADAS ~~~~~~~")
+            elif(lang == 'en'):
+                print("~~~~~~~ QUANTITY OF REQUESTS ~~~~~~~")
+
             try:
                 requisicoesRestantes = int(auth.get_rate_limit().core.remaining)
             except requests.exceptions.ConnectionError as req:
-                print("Erro de conexão")
+                if(lang == 'pt'):
+                    print("Erro de conexão")
+                elif(lang == 'en'):
+                    print("Connection error")
                 return False
-            print("~~~~~~~ VERIFICANDO  REQUISIÇÕES ~~~~~~~")
-            print(str(requisicoesRestantes)+" dispoíveis.")
+            if(lang == 'pt'):
+                print("~~~~~~~ VERIFICANDO  REQUISIÇÕES ~~~~~~~")
+                print(str(requisicoesRestantes)+" dispoíveis.")
+            elif(lang == 'en'):
+                print("~~~~~~~ Checking requests ~~~~~~~")
+                print(str(requisicoesRestantes)+" available.")
     
         
