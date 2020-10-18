@@ -34,12 +34,20 @@ def extrairDados():
     vEvt = evtsIssue.get()
     vRct = varReactions.get()
     vLbs = varLabels.get()
+    
+    vLanguage = ''
+
+    if(languageCombo.get() == 'Portuguese'):
+        vLanguage = 'pt'
+    elif(languageCombo.get() == 'English'):
+        vLanguage = 'en'
+    
     messagebox.showinfo("Atenção!", 
                                 "Esta janela será fechada e o processo poderá ser acompanhado pelo terminal. Para finalizar o processo digite Ctrl + C")
     root.destroy()
     startMiningFunction(vkey, 
                         vList, 
-                        'en', 
+                        vLanguage, 
                         vOp , 
                         vCls, 
                         vComm, 
@@ -121,6 +129,12 @@ reactionsCheck.place(x=102, y=190)
 commentCheck = Checkbutton(
     root, text="Extrair comentários", variable=varComment, background=color)
 commentCheck.place(x=102, y=210)
+
+languageLabel = Label(root, text="Database language key:", background=color)
+languageLabel.place(x=102, y=235)
+languageCombo = ttk.Combobox(root, values=["Portuguese", "English"])
+languageCombo.current(1)
+languageCombo.place(x=102, y=260)
 
 extrairButton = Button(root)
 extrairButton["text"] = "Extrair dados "
