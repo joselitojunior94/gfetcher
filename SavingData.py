@@ -178,6 +178,25 @@ def getIssue(iss, repository):
         print('AtributeError exception')
         return None
 
+def extractLastIssueNumber(auth, repo, lang):
+    issuesOpen = issuesClosed = 0
+    
+    try:
+        repository = auth.get_repo(repo)
+        verificaQuantRequisicoes(auth)
+        for issue in repository.get_issues(state="all"):
+            return int(issue.number)
+    except GithubException as d:
+        if(d.status == 404):
+           f = open('DONT_EXISTS.txt', 'a')
+           f.write(str(repo) + '\n')
+           f.close()
+
+           if(lang == 'pt'):
+               print('Repositório não existe')
+           elif(lang == 'en'):
+               print('Repository does not exist') 
+
 
 def extractDataFromGithub(key, repo, initialIssue, finalIssue, lang, opFlag, clFlag, comFlag, evtFlag, rctFlag, labelsFlag):    
     repoCount = 0
