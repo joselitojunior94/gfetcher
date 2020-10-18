@@ -166,6 +166,18 @@ def extraiLabel(repo, a):
 
 requisicoesRestantes = 0
 
+# Function to mine the issue with error handling
+def getIssue(iss, repository):
+    try:
+        issue = repository.get_issue(iss) ###
+        return issue
+    except GithubException as f:
+        if(f.status == 404):
+           return None
+    except AttributeError as a:
+        print('AtributeError exception')
+        return None
+
 def extractDataFromGithub(key, repoList, initialIssue, finalIssue, lang, opFlag, clFlag, comFlag, evtFlag, rctFlag, labelsFlag):    
     repoCount = 0
     global requisicoesRestantes
