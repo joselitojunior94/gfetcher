@@ -24,8 +24,7 @@ def adicionaNaLista():
             print('Não houve seleção de arquivo.')
             
 def extrairDados():
-    vLogin = loginEntry.get()
-    vPass =  passEntry.get()
+    vkey = keyEntry.get()
     vList =  listbox.get(0, END)
     vOp = varOpen.get()
     vCls = varClose.get()
@@ -38,15 +37,8 @@ def extrairDados():
     root.destroy()
     flag = False
     while (flag == False):
-        flag = extractDataFromGithub(vLogin, 
-                        vPass, 
-                        vList, 
-                        vOp, 
-                        vCls, 
-                        vComm, 
-                        vEvt, 
-                        vRct, 
-                        vLbs)
+        pass
+
 
 def removerRepo():
     listbox.delete(listbox.curselection())
@@ -126,23 +118,14 @@ extrairButton["width"] = 12
 extrairButton["command"] = extrairDados
 extrairButton.place(x=296, y=350)
 
-loginLabel = Label(
-    root, text="Login: ", background=color)
-loginLabel["font"] = ("Arial", "12", "bold")
-loginLabel.place(x=10, y=328)
+keyLabel = Label(
+    root, text="Key: ", background=color)
+keyLabel["font"] = ("Arial", "12", "bold")
+keyLabel.place(x=10, y=328)
 
-loginEntry = Entry(root)
-loginEntry["width"] = 10
-loginEntry.place(x=10, y=350)
-
-loginLabel = Label(
-    root, text="Senha: ", background=color)
-loginLabel["font"] = ("Arial", "12", "bold")
-loginLabel.place(x=150, y=328)
-
-passEntry = Entry(root, show='*')
-passEntry["width"] = 10
-passEntry.place(x=150, y=350)
+keyEntry = Entry(root, show='*')
+keyEntry["width"] = 33
+keyEntry.place(x=10, y=350)
 
 root.resizable(False, False)
 root.configure(background=color)
