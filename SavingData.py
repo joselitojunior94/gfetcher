@@ -166,13 +166,15 @@ def extraiLabel(repo, a):
 
 requisicoesRestantes = 0
 
-def extractDataFromGithub(us, ps, repoList, opFlag, clFlag, comFlag, evtFlag, rctFlag, labelsFlag):    
+def extractDataFromGithub(key, repoList, opFlag, clFlag, comFlag, evtFlag, rctFlag, labelsFlag):    
     repoCount = 0
     global requisicoesRestantes
     global lastIssue
+    global lastOne
+    lastIssue = 0
 
     try:
-        auth = Github(us, ps)
+        auth = Github(key)
         requisicoesRestantes = int(auth.rate_limiting[0])
         verificaQuantRequisicoes(auth)
         for repoID in repoList:
