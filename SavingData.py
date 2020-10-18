@@ -331,7 +331,7 @@ def extractDataFromGithub(auth, repo, initialIssue, finalIssue, lang, opFlag, cl
         
         while(initialIssue < finalIssue):
             verificaQuantRequisicoes(auth)
-            issue = getIssue(initialIssue, repo) # Add call to get the first issue in repository
+            issue = getIssue(initialIssue, repository) # Add call to get the first issue in repository
             if(issue is not None and issue.number is not None):
                 lastOne = issue.number
                 # Add last repo and issue log to recovery after
