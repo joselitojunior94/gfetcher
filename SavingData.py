@@ -241,7 +241,7 @@ def startMiningFunction(token, lista_repo, language, op, cl, com, evt, rct, labe
         arq.close()
         issue_A = issue_Z = 0 
 
-        issue_Z = extractLastIssueNumber(auth, r)
+        issue_Z = extractLastIssueNumber(auth, repo)
         
         flag = False
 
@@ -268,7 +268,8 @@ def startMiningFunction(token, lista_repo, language, op, cl, com, evt, rct, labe
                         print('Error in first issue search')
                     exit(0)
             
-            flag = extractDataFromGithub(auth, 
+            flag = extractDataFromGithub(auth,
+                                         repo, 
                                          issue_A, 
                                          issue_Z, 
                                          language, 
@@ -297,7 +298,7 @@ def startMiningFunction(token, lista_repo, language, op, cl, com, evt, rct, labe
                         print("- DATABASE CONNECTED - ")     
                 exit(0)
 
-def extractDataFromGithub(auth, initialIssue, finalIssue, lang, opFlag, clFlag, comFlag, evtFlag, rctFlag, labelsFlag):    
+def extractDataFromGithub(auth, repo, initialIssue, finalIssue, lang, opFlag, clFlag, comFlag, evtFlag, rctFlag, labelsFlag):    
     repoCount = 0
     global requisicoesRestantes
     global lastIssue
@@ -366,7 +367,7 @@ def extractDataFromGithub(auth, initialIssue, finalIssue, lang, opFlag, clFlag, 
                                         r, e, c, l)
                     save(p, repository.name)
             initialIssue += 1        
-"""            
+            """            
             if(clFlag == 1):
                 issuesList = repository.get_issues(state='closed')
                 verificaQuantRequisicoes(auth) 
@@ -394,7 +395,7 @@ def extractDataFromGithub(auth, initialIssue, finalIssue, lang, opFlag, clFlag, 
                                             r, e, c, l)
                         save(p, repository.name)      
             repoCount += 1
-    """
+            """
         if(iss == issFinal):
             if(lang == 'pt'): 
                 print(str(repository.full_name)+" minerado com sucesso!")
