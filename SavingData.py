@@ -178,6 +178,8 @@ def getIssue(iss, repository):
         print('AtributeError exception')
         return None
 
+# Function to retrieve the number of the last issue from the repository
+
 def extractLastIssueNumber(auth, repo, lang):
     issuesOpen = issuesClosed = 0
     
@@ -196,6 +198,17 @@ def extractLastIssueNumber(auth, repo, lang):
                print('Repositório não existe')
            elif(lang == 'en'):
                print('Repository does not exist') 
+
+def already_mined_list(PATH):
+    repos_list = []
+    
+    for f in glob.glob(os.path.join(PATH, '*json')):
+        colName = f.rsplit('/', 1)[-1]
+        cllName = colName.replace('***', '/')
+        #print(cllName)
+        repos_list.append(cllName.replace('.json', ''))
+    
+    return repos_list
 
 
 def extractDataFromGithub(key, repo, initialIssue, finalIssue, lang, opFlag, clFlag, comFlag, evtFlag, rctFlag, labelsFlag):    
