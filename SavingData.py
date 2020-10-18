@@ -166,7 +166,7 @@ def extraiLabel(repo, a):
 
 requisicoesRestantes = 0
 
-def extractDataFromGithub(key, repoList, initialIssue, finalIssue, opFlag, clFlag, comFlag, evtFlag, rctFlag, labelsFlag):    
+def extractDataFromGithub(key, repoList, initialIssue, finalIssue, lang, opFlag, clFlag, comFlag, evtFlag, rctFlag, labelsFlag):    
     repoCount = 0
     global requisicoesRestantes
     global lastIssue
