@@ -41,9 +41,9 @@ def extrairDados():
         vLanguage = 'pt'
     elif(languageCombo.get() == 'English'):
         vLanguage = 'en'
-    
-    messagebox.showinfo("Atenção!", 
-                                "Esta janela será fechada e o processo poderá ser acompanhado pelo terminal. Para finalizar o processo digite Ctrl + C")
+    print(vLanguage)
+    messagebox.showinfo("Warning! Atenção!", 
+                                "Esta janela será fechada e o processo poderá ser acompanhado pelo terminal. Para finalizar o processo digite Ctrl + C.\n\nThis window will be closed and the process can be followed by the terminal window. To end the process type Ctrl + C ")
     root.destroy()
     startMiningFunction(vkey, 
                         vList, 
