@@ -7,6 +7,8 @@ from datetime import *
 from functools import partial
 import tkinter as tk
 import tkinter.messagebox
+import SavingData
+from SavingData import startMiningFunction
 
 def adicionaNaLista():
     entrada = nomeRepositorioEntry.get()
@@ -35,9 +37,18 @@ def extrairDados():
     messagebox.showinfo("Atenção!", 
                                 "Esta janela será fechada e o processo poderá ser acompanhado pelo terminal. Para finalizar o processo digite Ctrl + C")
     root.destroy()
-    flag = False
-    while (flag == False):
-        pass
+    startMiningFunction(vkey, 
+                        vList, 
+                        'en', 
+                        vOp , 
+                        vCls, 
+                        vComm, 
+                        vEvt, 
+                        vRct, 
+                        vLbs)
+    #flag = False
+    #while (flag == False):
+    #    pass
 
 
 def removerRepo():
