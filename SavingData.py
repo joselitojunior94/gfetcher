@@ -279,7 +279,7 @@ def extractDataFromGithub(key, repo, initialIssue, finalIssue, lang, opFlag, clF
                                         issue.title, 
                                         issue.body, 
                                         r, e, c, l)
-                        save(p, repository.name)
+                    save(p, repository.name)
             initialIssue += 1        
 """            
             if(clFlag == 1):
