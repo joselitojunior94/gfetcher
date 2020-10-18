@@ -67,6 +67,18 @@ def mountReactionsJSON(thumbsup, heart, hooray, confused, deslike, laugh, rocket
 
     return J
 
+# Function to verify if the collection is in database
+def verify_Collection(coll):
+    global banco
+
+    lista_collections = banco.list_collection_names()
+
+    if(coll in lista_collections):
+        return True
+    else:
+        return False
+
+
 def find(db, J):
     p = db.issue_collection
     return p.find_one(J)
