@@ -21,6 +21,7 @@ def extraiEventos(issue, a):
     verificaQuantRequisicoes(a)
     print("---> Extraindo EVENTOS...")
     events = []
+    global LANG
 
     try:
         e = ''
@@ -33,26 +34,26 @@ def extraiEventos(issue, a):
                                        '-', 
                                        event.created_at, 
                                        event.event, 
-                                       '-')
+                                       '-', LANG)
                 else:
                     e = mountEventJSON(issue.number, 
                                        '-', 
                                        event.created_at, 
                                        event.event, 
-                                       event.label.name)
+                                       event.label.name, LANG)
             else:
                 if(event.label is None):
                     e = mountEventJSON(issue.number, 
                                        event.actor.login, 
                                        event.created_at, 
                                        event.event, 
-                                       '-')
+                                       '-', LANG)
                 else:
                     e = mountEventJSON(issue.number, 
                                        event.actor.login, 
                                        event.created_at, 
                                        event.event, 
-                                       event.label.name)
+                                       event.label.name, LANG)
             events.append(e)
     except requests.exceptions.ReadTimeout as aes:
         print('Error de conexão')

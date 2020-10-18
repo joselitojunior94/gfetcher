@@ -10,13 +10,21 @@ def save(data, collec_name):
    p = banco[collec_name]
    reg = p.insert(data)
 
-def mountEventJSON(atb0, atb1, atb2, atb3, atb4):
+def mountEventJSON(atb0, atb1, atb2, atb3, atb4, language):
     J1 = {  'Issue': atb0,
+            'User': atb1,
+            'Created_at': atb2,
+            'Event': atb3,
+            'Label': atb4
+    }
+    
+    if(language == 'pt'):
+        J1 = {  'Issue': atb0,
             'Ator': atb1,
             'Criado em': atb2,
             'Evento': atb3,
             'Label': atb4
-    }
+        }
 
     return J1
 
