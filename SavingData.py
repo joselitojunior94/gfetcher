@@ -237,7 +237,7 @@ def startMiningFunction(token, lista_repo, language, op, cl, com, evt, rct, labe
     for repo in lista_repo:
         
         arq_last = open('UltimoRepositorio.txt', 'w')
-        arq_last.write(str(r))
+        arq_last.write(str(repo))
         arq_last.close()
 
         issue_A = issue_Z = 0 
@@ -251,12 +251,12 @@ def startMiningFunction(token, lista_repo, language, op, cl, com, evt, rct, labe
                 if(LANG == 'pt'):
                     print("-->-->--> Repositorio sem Issues: "+str(repo))
                     arq_sem_issues = open('SemIssues.txt', 'a')
-                    arq_sem_issues.write(str(r)+'\n')
+                    arq_sem_issues.write(str(repo)+'\n')
                     arq_sem_issues.close()
                 elif(LANG == 'en'):
                     print("-->-->--> Repository without issues: "+str(repo))
                     ach_without_issues = open('WithoutIssues.txt', 'a')
-                    ach_without_issues.write(str(r)+'\n')
+                    ach_without_issues.write(str(repo)+'\n')
                     ach_without_issues.close()
                 break
             if(verify_Collection(repo) == True):
