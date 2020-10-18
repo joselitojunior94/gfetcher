@@ -17,7 +17,7 @@ def mountEventJSON(atb0, atb1, atb2, atb3, atb4, language):
             'Event': atb3,
             'Label': atb4
     }
-    
+
     if(language == 'pt'):
         J1 = {  'Issue': atb0,
             'Ator': atb1,
@@ -28,8 +28,16 @@ def mountEventJSON(atb0, atb1, atb2, atb3, atb4, language):
 
     return J1
 
-def mountIssueCommentJSON(atb1, atb2, atb3, atb4):
+def mountIssueCommentJSON(atb1, atb2, atb3, atb4, language):
     J = { 
+          'Author': atb1,
+          'Date': atb2,
+          'Comments': atb3,
+          'Reactions': atb4
+        }
+         
+    if(language == 'pt'):
+        J = { 
           'Autor': atb1,
           'Data': atb2,
           'Comentário': atb3,

@@ -81,12 +81,12 @@ def extraiComentarios(issue, a):
                 c = mountIssueCommentJSON('-', 
                                           comment.created_at, 
                                           comment.body, 
-                                          reactions) 
+                                          reactions, LANG) 
             else: 
                 c = mountIssueCommentJSON(comment.user.login, 
                                           comment.created_at, 
                                           comment.body, 
-                                          reactions)                       
+                                          reactions, LANG)                       
             comments.append(c)
             
     except GithubException as e:
