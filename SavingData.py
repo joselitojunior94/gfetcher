@@ -18,8 +18,13 @@ LANG = 'en'
 countErrors = 0
 
 def extraiEventos(issue, a):
+    global LANG
     verificaQuantRequisicoes(a)
-    print("---> Extraindo EVENTOS...")
+    if(LANG == 'pt'):
+        print("---> Extraindo EVENTOS...")
+    elif(LANG == 'en'):
+        print('---> Mining EVENTS...')
+        
     events = []
     global LANG
 
