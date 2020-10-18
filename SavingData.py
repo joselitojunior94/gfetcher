@@ -14,7 +14,7 @@ import glob
 import subprocess
 
 lastIssue = -1
-LANG = 'en'
+LANG = None
 countErrors = 0
 
 def extraiEventos(issue, a):
@@ -238,6 +238,7 @@ def startMiningFunction(token, lista_repo, language, op, cl, com, evt, rct, labe
 
     auth = Github(token)
     LANG = language
+    print(LANG)
 
     for repo in lista_repo:
         
