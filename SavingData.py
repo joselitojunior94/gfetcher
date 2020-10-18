@@ -184,7 +184,7 @@ def getIssue(iss, repository):
 
 # Function to retrieve the number of the last issue from the repository
 
-def extractLastIssueNumber(auth, repo, lang):
+def extractLastIssueNumber(auth, repo):
     issuesOpen = issuesClosed = 0
     
     try:
@@ -198,9 +198,9 @@ def extractLastIssueNumber(auth, repo, lang):
            f.write(str(repo) + '\n')
            f.close()
 
-           if(lang == 'pt'):
+           if(LANG == 'pt'):
                print('Repositório não existe')
-           elif(lang == 'en'):
+           elif(LANG == 'en'):
                print('Repository does not exist') 
 
 # Function to retrieve already mined repositories in a json folder and add to the already mined list
@@ -237,8 +237,9 @@ def startMiningFunction(token, lista_repo, language, op, cl, com, evt, rct, labe
     for repo in lista_repo:
         
         arq_last = open('UltimoRepositorio.txt', 'w')
-        arq.write(str(r))
-        arq.close()
+        arq_last.write(str(r))
+        arq_last.close()
+
         issue_A = issue_Z = 0 
 
         issue_Z = extractLastIssueNumber(auth, repo)
@@ -246,7 +247,7 @@ def startMiningFunction(token, lista_repo, language, op, cl, com, evt, rct, labe
         flag = False
 
         while(flag == False):
-            if(issue_finale is None):
+            if(issue_Z is None):
                 if(LANG == 'pt'):
                     print("-->-->--> Repositorio sem Issues: "+str(repo))
                     arq_sem_issues = open('SemIssues.txt', 'a')
@@ -258,7 +259,7 @@ def startMiningFunction(token, lista_repo, language, op, cl, com, evt, rct, labe
                     ach_without_issues.write(str(r)+'\n')
                     ach_without_issues.close()
                 break
-            if(verify_Collection(r) == True):
+            if(verify_Collection(repo) == True):
                 try:
                     issue_A = int(getLastIssue(repo)['Id'])
                 except:
@@ -312,7 +313,7 @@ def extractDataFromGithub(auth, repo, initialIssue, finalIssue, lang, opFlag, cl
         requisicoesRestantes = int(auth.rate_limiting[0])
         verificaQuantRequisicoes(auth)
         #for repoID in repoList:
-        repository = auth.get_repo(repoID)
+        repository = auth.get_repo(repo)
         
         if(lang == 'pt'):
             print('Extração do repositorio '+repository.full_name+ ' começou.')
@@ -396,7 +397,7 @@ def extractDataFromGithub(auth, repo, initialIssue, finalIssue, lang, opFlag, cl
                         save(p, repository.name)      
             repoCount += 1
             """
-        if(iss == issFinal):
+        if(initialIssue == finalIssue):
             if(lang == 'pt'): 
                 print(str(repository.full_name)+" minerado com sucesso!")
             elif(lang == 'en'):
