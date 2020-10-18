@@ -220,9 +220,11 @@ def extractDataFromGithub(key, repo, initialIssue, finalIssue, lang, opFlag, clF
     global requisicoesRestantes
     global lastIssue
     global lastOne
+    global LANG
     lastIssue = 0
 
     try:
+        LANG = lang
         auth = Github(key)
         requisicoesRestantes = int(auth.rate_limiting[0])
         verificaQuantRequisicoes(auth)
