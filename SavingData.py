@@ -177,31 +177,53 @@ def extractDataFromGithub(key, repoList, initialIssue, finalIssue, lang, opFlag,
         auth = Github(key)
         requisicoesRestantes = int(auth.rate_limiting[0])
         verificaQuantRequisicoes(auth)
-        for repoID in repoList:
-            repository = auth.get_repo(repoID)
-            print('Extração do repositorio '+repository.name+ ' começou.')
-            verificaQuantRequisicoes(auth) 
-            l = '-'
-            if(labelsFlag == 1):
-                l = extraiLabel(repository, auth)
-            if(opFlag == 1):
-                issuesList = repository.get_issues()            
-                for issue in issuesList:
-                    if(findIssue(issue.number, repository.name) is None): 
-                        lastIssue = issue
-                        verificaQuantRequisicoes(auth)  
-                        print('--> Extraindo Open Issue : '+str(issue.number))
-                        e = '-'
-                        c = '-'
-                        r = '-'
-                        if(evtFlag == 1):
-                            e = extraiEventos(issue, auth)
-                        if(comFlag == 1):
-                            c = extraiComentarios(issue, auth)
-                        if(rctFlag == 1):
-                            r = extraiReacoes(issue, auth) 
+        #for repoID in repoList:
+        repository = auth.get_repo(repoID)
+        
+        if(lang == 'pt'):
+            print('Extração do repositorio '+repository.full_name+ ' começou.')
+        elif(lang == 'en'):
+            print('Extraction of the '+repository.full_name+ ' repository started.')
+
+        verificaQuantRequisicoes(auth) 
+        l = extraiLabel(repository, auth)
+        #if(labelsFlag == 1):
+        #    l = extraiLabel(repository, auth)
+        #    if(opFlag == 1):
+        if(finalIssue == None):
+            return True
+        
+        while(initialIssue < finalIssue):
+            verificaQuantRequisicoes(auth)
+            issue = 0 # Add call to get the first issue in repository
+            if(issue is not None and issue.number is not None):
+                lastOne = issue.number
+                # Add last repo and issue log to recovery after
+                file = open('LOG_LASTissue.txt', 'w')
+                file.write(str(repo) + ':' + str(issue.number))
+                file.close()
+
+
+                #issuesList = repository.get_issues()            
+                #for issue in issuesList:
+                if(findIssue(issue.number, repository.name) is None): 
+                #        lastIssue = issue
+                    verificaQuantRequisicoes(auth)
+                    if(lang == 'pt'):  
+                        print('--> Extraindo issue : '+str(issue.number))
+                    elif(lang == 'en'):
+                        print('--> Mining issue: '+str(issue.number))
+                    e = '-'
+                    c = '-'
+                    r = '-'
+                    if(evtFlag == 1):
+                         e = extraiEventos(issue, auth)
+                    if(comFlag == 1):
+                        c = extraiComentarios(issue, auth)
+                    if(rctFlag == 1):
+                        r = extraiReacoes(issue, auth) 
                         
-                        p = mountIssueJSON(repository.name, 
+                    p = mountIssueJSON(repository.name, 
                                         issue.number, 
                                         issue.user.login, 
                                         issue.created_at, 
@@ -210,7 +232,8 @@ def extractDataFromGithub(key, repoList, initialIssue, finalIssue, lang, opFlag,
                                         issue.body, 
                                         r, e, c, l)
                         save(p, repository.name)
-                    
+            initialIssue += 1        
+"""            
             if(clFlag == 1):
                 issuesList = repository.get_issues(state='closed')
                 verificaQuantRequisicoes(auth) 
@@ -238,8 +261,13 @@ def extractDataFromGithub(key, repoList, initialIssue, finalIssue, lang, opFlag,
                                             r, e, c, l)
                         save(p, repository.name)      
             repoCount += 1
-        if(repoCount == len(repoList)):
-            print("Concluído!", "Trabalho concluído.")
+    """
+        if(iss == issFinal):
+            if(lang == 'pt'): 
+                print(str(repository.full_name)+" minerado com sucesso!")
+            elif(lang == 'en'):
+                print(str(repository.full_name)+" repository successfully mined!")
+
             return True
     except requests.exceptions.ReadTimeout as req:
         print("Erro de conexão")
