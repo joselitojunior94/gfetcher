@@ -95,6 +95,15 @@ def delete(number, collec_name):
     J = {'id': number}
     p.delete_one(J)
 
+# Function to verify if a collection was mined completely
+def verificaSeNaoFinalizou(db, repo_name):
+    issue = banco[str(repo_name)].find_one({'Id': 1})
+    
+    if(issue is None):
+        return True
+    
+    return False
+
 
 banco = connect()
 
