@@ -365,7 +365,7 @@ def extractDataFromGithub(auth, repo, initialIssue, finalIssue, lang, opFlag, cl
                                         issue.state, 
                                         issue.title, 
                                         issue.body, 
-                                        r, e, c, l)
+                                        r, e, c, l, LANG)
                     save(p, repository.name)
             initialIssue += 1        
             """            

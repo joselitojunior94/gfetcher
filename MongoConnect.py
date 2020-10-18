@@ -30,8 +30,22 @@ def mountIssueCommentJSON(atb1, atb2, atb3, atb4):
 
     return J
 
-def mountIssueJSON(atb0, atb1, atb2, atb3, atb4, atb5, atb6, atb7, atb8, atb9, atb10):
-    J = { 'Nome do Repositório' : atb0, 
+def mountIssueJSON(atb0, atb1, atb2, atb3, atb4, atb5, atb6, atb7, atb8, atb9, atb10, language):
+    J = { 'Repository_name' : atb0, 
+          'Id':  atb1,
+          'Author': atb2,
+          'Created_at': atb3,
+          'Status': atb4,
+          'Title': atb5,
+          'Body': atb6,
+          'Labels': atb10,
+          'Reactions': atb7,
+          'Events': atb8,
+          'Comments':atb9 
+        }
+    
+    if(language == 'pt'):
+        J = { 'Nome do Repositório' : atb0, 
           'id':  atb1,
           'Autor': atb2,
           'Criado em': atb3,
