@@ -15,6 +15,7 @@ import subprocess
 
 lastIssue = -1
 LANG = 'en'
+countErrors = 0
 
 def extraiEventos(issue, a):
     verificaQuantRequisicoes(a)
@@ -227,7 +228,76 @@ def getLastIssue(col):
     
     return last_issue
 
-def extractDataFromGithub(key, repo, initialIssue, finalIssue, lang, opFlag, clFlag, comFlag, evtFlag, rctFlag, labelsFlag):    
+def startMiningFunction(token, lista_repo, language, op, cl, com, evt, rct, labels):
+    global LANG
+
+    auth = Github(token)
+    LANG = language
+
+    for repo in lista_repo:
+        
+        arq_last = open('UltimoRepositorio.txt', 'w')
+        arq.write(str(r))
+        arq.close()
+        issue_A = issue_Z = 0 
+
+        issue_Z = extractLastIssueNumber(auth, r)
+        
+        flag = False
+
+        while(flag == False):
+            if(issue_finale is None):
+                if(LANG == 'pt'):
+                    print("-->-->--> Repositorio sem Issues: "+str(repo))
+                    arq_sem_issues = open('SemIssues.txt', 'a')
+                    arq_sem_issues.write(str(r)+'\n')
+                    arq_sem_issues.close()
+                elif(LANG == 'en'):
+                    print("-->-->--> Repository without issues: "+str(repo))
+                    ach_without_issues = open('WithoutIssues.txt', 'a')
+                    ach_without_issues.write(str(r)+'\n')
+                    ach_without_issues.close()
+                break
+            if(verify_Collection(r) == True):
+                try:
+                    issue_A = int(getLastIssue(repo)['Id'])
+                except:
+                    if(LANG == 'pt'):
+                        print('Erro na busca da primeira issue do repositório')
+                    elif(LANG == 'en'):
+                        print('Error in first issue search')
+                    exit(0)
+            
+            flag = extractDataFromGithub(auth, 
+                                         issue_A, 
+                                         issue_Z, 
+                                         language, 
+                                         op, 
+                                         cl, 
+                                         com, 
+                                         evt, 
+                                         rct, 
+                                         labels)
+            if(flag == False):
+                countErrors += 1
+            elif(flag == True):
+                countErrors = 0
+
+            if(countErrors == 1000):
+                signal = int(os.system(" mongo --eval \"db.getSiblingDB('admin').shutdownServer()\" "))
+                if(signal == 0):
+                    if(LANG == 'pt'):
+                        print("- BANCO DESCONECTADO DEVIDO A ERRO DE REDE - ")
+                    elif(LANG == 'en'):
+                        print("- DATABASE DESCONNECT TO NETWORK ERROR - ")
+                elif(signal == 256):
+                    if(LANG == 'pt'):
+                        print("- JÁ DESCONECTADO  - ")
+                    elif(LANG == 'en'):
+                        print("- DATABASE CONNECTED - ")     
+                exit(0)
+
+def extractDataFromGithub(auth, initialIssue, finalIssue, lang, opFlag, clFlag, comFlag, evtFlag, rctFlag, labelsFlag):    
     repoCount = 0
     global requisicoesRestantes
     global lastIssue
@@ -237,7 +307,7 @@ def extractDataFromGithub(key, repo, initialIssue, finalIssue, lang, opFlag, clF
 
     try:
         LANG = lang
-        auth = Github(key)
+        #auth = Github(key)
         requisicoesRestantes = int(auth.rate_limiting[0])
         verificaQuantRequisicoes(auth)
         #for repoID in repoList:
