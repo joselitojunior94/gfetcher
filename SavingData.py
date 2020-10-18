@@ -178,7 +178,8 @@ def getIssue(iss, repository):
         print('AtributeError exception')
         return None
 
-def extractDataFromGithub(key, repoList, initialIssue, finalIssue, lang, opFlag, clFlag, comFlag, evtFlag, rctFlag, labelsFlag):    
+
+def extractDataFromGithub(key, repo, initialIssue, finalIssue, lang, opFlag, clFlag, comFlag, evtFlag, rctFlag, labelsFlag):    
     repoCount = 0
     global requisicoesRestantes
     global lastIssue
@@ -207,7 +208,7 @@ def extractDataFromGithub(key, repoList, initialIssue, finalIssue, lang, opFlag,
         
         while(initialIssue < finalIssue):
             verificaQuantRequisicoes(auth)
-            issue = 0 # Add call to get the first issue in repository
+            issue = getIssue(initialIssue, repo) # Add call to get the first issue in repository
             if(issue is not None and issue.number is not None):
                 lastOne = issue.number
                 # Add last repo and issue log to recovery after
