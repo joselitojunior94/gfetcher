@@ -214,6 +214,18 @@ def already_mined_list(PATH):
     
     return repos_list
 
+# Function to search for the last issue of the database for recovery
+def getLastIssue(col):
+    global banco 
+
+    #banco = cliente[db]
+    collection = banco[col]
+    last_issue = 0
+
+    for c in collection.find():
+        last_issue = c
+    
+    return last_issue
 
 def extractDataFromGithub(key, repo, initialIssue, finalIssue, lang, opFlag, clFlag, comFlag, evtFlag, rctFlag, labelsFlag):    
     repoCount = 0
