@@ -54,7 +54,7 @@ def removerRepo():
 color = '#f2f2f2'
 
 root = Tk()
-root.geometry("600x380+400+200")
+root.geometry("620x400+400+200")
 root.resizable(10, 0)
 root.title("gFetcher")
 
