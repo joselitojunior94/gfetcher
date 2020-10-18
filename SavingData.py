@@ -10,6 +10,8 @@ import io
 import os
 import time
 import requests
+import glob
+import subprocess
 
 lastIssue = -1
 
@@ -199,6 +201,7 @@ def extractLastIssueNumber(auth, repo, lang):
            elif(lang == 'en'):
                print('Repository does not exist') 
 
+# Function to retrieve already mined repositories in a json folder and add to the already mined list
 def already_mined_list(PATH):
     repos_list = []
     
