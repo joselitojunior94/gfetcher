@@ -14,6 +14,7 @@ import glob
 import subprocess
 
 lastIssue = -1
+LANG = 'en'
 
 def extraiEventos(issue, a):
     verificaQuantRequisicoes(a)
